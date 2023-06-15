@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "JAVINFO API - OPENAPI 3.0",
+    "description": "An API to fetch JAV info",
+    "contact": {
+      "email": "iamrony777@proton.me"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://github.com/iamrony777/javinfo-api-js/blob/main/LICENSE"
+    },
+    "version": "1.1.0"
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Current Server"
+    },
+    {
+      "url": "https://free.javinfo.eu.org",
+      "description": "Free API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "public",
+      "description": "Public endpoint, without ratelimits"
+    },
+    {
+      "name": "private",
+      "description": "Authorized endpoints"
+    },
+    {
+      "name": "info",
+      "description": "General information about current server"
+    }
+  ],
+  "paths": {
+    "/search": {
+      "post": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Search for a JAV movie by its ID",
+        "description": "### R18 \n* homepage: https://r18.dev\n* avg response time: 850-1000ms\n* check response schema for response details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/response"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/check": {
+      
+      "get": {
+        "description": "Send get resquest to all provider's homepage and return statusCode",
+        "tags": [
+          "info"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/check.get.response"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Input a Url to check if it's returns 200",
+        "tags": [
+          "info"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/check.post.request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/check.post.response"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Check status code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/check.post.response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "request": {
+        "required": [
+          "code",
+          "provider"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "example": "EBOD-391"
+          },
+          "provider": {
+            "type": "string",
+            "default": "r18",
+            "enum": [
+              "r18",
+              "javdb",
+              "javdatabase",
+              "javlibrary",
+              "dmn"
+            ]
+          }
+        }
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "title_ja": {
+            "type": "string"
+          },
+          "poster": {
+            "type": "string"
+          },
+          "preview": {
+            "type": "string",
+            "default": null
+          },
+          "details": {
+            "type": "object",
+            "properties": {
+              "director": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "release_date": {
+                "type": "string"
+              },
+              "runtime": {
+                "type": "integer"
+              },
+              "studio": {
+                "type": "string"
+              }
+            }
+          },
+          "actress": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "screenshots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "check.post.response": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      },
+      "check.post.request": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "url"
+        ]
+      },
+      "check.get.response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "statusCode": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "url",
+            "statusCode"
+          ]
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

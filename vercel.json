@@ -1,0 +1,15 @@
+{
+    "functions": {
+        "api/serverless.ts": {
+            "runtime": "@vercel/node@2.14.3"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/search",
+            "destination": "/api/serverless"
+        }
+    ],
+    "cleanUrls": true,
+    "public": false
+}

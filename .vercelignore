@@ -1,0 +1,7 @@
+.vercel
+.env
+node_modules
+_*
+*test*
+api/check*
+api/search*
