@@ -1,62 +1,41 @@
-import createFastify, { FastifyInstance, FastifyServerOptions } from "fastify";
+// import { LOGGER as logger } from "./handlers/logger";
 
-import { searchRouter } from "./api/search";
-import { checkRouter } from "./api/check";
+Bun.serve({
+  development: false,
+  hostname: "0.0.0.0",
+  port: 8080,
+  error(request) {
+    console.error({ error: request });
+  },
+  fetch(request) {
+    console.debug({ request });
+    const url = new URL(request.url);
 
-const buildFastify = async (
-  options: FastifyServerOptions = {}
-): Promise<FastifyInstance> => {
-  const fastifyRequestLogger = (await import("@mgcrea/fastify-request-logger"))
-    .default;
+    switch (request.method) {
+      case "GET":
+        switch (url.pathname) {
+          case "/":
+            return new Response(JSON.stringify(url.pathname), { status: 200 });
 
-  let fastify: FastifyInstance;
-
-  if (process.env.LOGTAIL_TOKEN) {
-    fastify = createFastify({
-      logger: {
-        level: "debug",
-        transport: {
-          target: "@logtail/pino",
-          options: {
-            sourceToken: process.env.LOGTAIL_TOKEN,
-            translateTime: "HH:MM:ss Z",
-            ignore: "pid,hostname,plugin",
-          },
-        },
-      },
-      ...options,
-    });
-  } else {
-    fastify = createFastify({
-      logger: {
-        level: "debug",
-        transport: {
-          target: "pino-pretty",
-          options: {
-            translateTime: "HH:MM:ss Z",
-            ignore: "pid,hostname,plugin",
-          },
-        },
-      },
-      ...options,
-    });
-  }
-
-  fastify.register(fastifyRequestLogger);
-
-  return fastify;
-};
-
-(async () => {
-  const app = await buildFastify();
-  app.register(searchRouter, { prefix: "/search" });
-  app.register(checkRouter, { prefix: "/check" });
-  app.get("/ping", (req, res) => {
-    res.send("pong");
-  });
-
-  app.listen({ port: parseInt(process.env.PORT || "3000") }).then(() => {
-	// @ts-ignore
-    console.log(`server listening on port ${app.server.address()?.port}`);
-  });
-})();
+          case "/check":
+            return new Response(JSON.stringify(url.pathname), { status: 200 });
+          case "/search":
+            switch (url.searchParams.get("provider")) {
+            case "r18":
+            case "javdb":
+            case "javdatabase":
+            case "javlibrary":
+            case "dmn":
+              return new Response(JSON.stringify(url.searchParams), { status: 200 });
+            }
+          default:
+            return new Response("Not Found / Not implemented", { status: 404 });
+        }
+      case "POST":
+        return new Response(JSON.stringify(url.searchParams), { status: 200 });
+      default:
+        return new Response(JSON.stringify(url.searchParams), { status: 200 });
+    }
+    return new Response(JSON.stringify(request), { status: 200 });
+  },
+});

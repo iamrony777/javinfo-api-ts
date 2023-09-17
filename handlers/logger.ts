@@ -2,7 +2,7 @@ import { HttpLogger, pinoHttp } from "pino-http";
 import P, { Logger } from "pino";
 import pretty from "pino-pretty";
 
-let LOGGER: HttpLogger | any
+let LOGGER: HttpLogger
 
 if (process.env.LOGTAIL_TOKEN) {
   const LOGGER = pinoHttp({

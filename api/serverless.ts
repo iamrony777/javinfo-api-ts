@@ -1,6 +1,6 @@
 import type { response, error } from "../common/types";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import r18 from "../handlers/r18";
+import r18 from "../handlers/r18.undici";
 import { isError, isResponse } from "../common/snippets";
 
 const ALL_PROVIDERS = ["r18", "javdb", "javdatabase", "javlibrary", "dmn"];

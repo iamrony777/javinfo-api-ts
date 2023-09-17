@@ -8,7 +8,7 @@ import {
 const ALL_PROVIDERS = ["r18", "javdb", "javdatabase", "javlibrary", "dmn"];
 const AVAILABLE_PROVIDERS = ["r18"];
 
-import r18 from "../handlers/r18";
+import r18 from "../handlers/r18.undici";
 import { isResponse } from "../common/snippets";
 import type { error, response } from "../common/types";
 
@@ -45,12 +45,12 @@ export async function searchRouter(
                     "Cache-Control",
                     "s-max-age=1, stale-while-revalidate"
                   )
-                  .send(result)
-                  return;
+                  .send(result);
+                return;
               } else {
                 res.status(404).send({
                   error: `${req.body.code} not found`,
-                })
+                });
                 return;
               }
 
@@ -76,4 +76,4 @@ export async function searchRouter(
       }
     }
   );
-};
+}
