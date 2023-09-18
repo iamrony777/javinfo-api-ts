@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: bun
+    env: docker
+    repo: https://github.com/iamrony777/javinfo-api-ts
+    plan: starter
+    branch: bun-migrate
+    autoDeploy: false
+    envVars:
+      - key: LOGTAIL_TOKEN

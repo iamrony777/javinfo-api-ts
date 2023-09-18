@@ -2,6 +2,9 @@
   "name": "javinfo-api-ts",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun index.ts"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
@@ -9,6 +12,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@logtail/pino": "^0.4.12",
     "@types/pino": "^7.0.5",
     "node-html-parser": "^6.1.10",
     "pino": "https://github.com/iamrony777/pino",

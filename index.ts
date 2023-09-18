@@ -7,7 +7,7 @@ const javdatbaseProvider = new Javdatabase();
 
 Bun.serve({
   development: false,
-  hostname: "0.0.0.0",
+  // hostname: "0.0.0.0",
   port: 8080,
   error(request) {
     logger.error({ error: request });
