@@ -8,7 +8,7 @@ import {
 const ALL_PROVIDERS = ["r18", "javdb", "javdatabase", "javlibrary", "dmn"];
 const AVAILABLE_PROVIDERS = ["r18"];
 
-import r18 from "../handlers/r18.undici";
+import r18 from "../providers/r18.undici";
 import { isResponse } from "../common/snippets";
 import type { error, response } from "../common/types";
 

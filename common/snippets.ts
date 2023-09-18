@@ -1,4 +1,4 @@
-import { response, error } from "./types";
+import { providerResponse, providerError } from "./types";
 export const httpStatusMessages: Record<number, string> = {
   100: 'Continue',
   101: 'Switching Protocols',
@@ -52,11 +52,11 @@ export const httpStatusMessages: Record<number, string> = {
   500: 'Internal Server error',
 };
 
-export function isResponse(object: any): object is response {
+export function isResponse(object: any): object is providerResponse {
   return (object && 'id' in object) ? true : false;
 }
 
-export function isError(object: any): object is error {
+export function isError(object: any): object is providerError {
   return (object && 'message' in object) ? true : false;
 }
 

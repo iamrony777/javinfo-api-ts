@@ -9,7 +9,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "pino": "^8.15.1",
+    "@types/pino": "^7.0.5",
+    "node-html-parser": "^6.1.10",
+    "pino": "https://github.com/iamrony777/pino",
     "pino-pretty": "^10.2.0"
   }
 }

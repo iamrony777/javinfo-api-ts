@@ -5,7 +5,6 @@
     "editor.formatOnType": false, // required
     "editor.formatOnSave": true, // optional 
     "editor.formatOnSaveMode": "file", // required to format on save
-    "vs-code-prettier-eslint.prettierLast": true // set as "true" to run 'prettier' last not first,
     "code-runner.executorMap": {
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
@@ -59,5 +58,13 @@
         "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "sml": "cd $dir && sml $fileName"
+    },
+    // The path to the `bun` executable.
+    "bun.runtime": "/home/gitpod/.nvm/versions/node/v18.17.1/bin/bun",
+    "bun.debugTerminal": {
+        // If support for Bun should be added to the default "JavaScript Debug Terminal".
+        "enabled": true,
+        // If the debugger should stop on the first line of the program.
+        "stopOnEntry": false,
     }
 }
