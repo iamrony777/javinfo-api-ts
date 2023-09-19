@@ -1,7 +1,7 @@
 import { pino } from "pino";
-import { PrettyOptions } from "pino-pretty";
+import type { PrettyOptions } from "pino-pretty";
 import type { Level, LevelWithSilent } from "pino";
-
+import "dotenv/config"
 const LOG_LEVEL =
   process.env.LOG_LEVEL ||
   process.env.NODE_ENV == "development" ||

@@ -5,7 +5,7 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - before: npm install -g bun
-  - init: bun install
+  - before: npm install --global typescript ts-node
+  - init: yarn install --cache-folder .yarn/cache
 
 

@@ -1,25 +1,53 @@
 {
     "compilerOptions": {
-      "lib": ["ESNext"],
-      "module": "ESNext",
-      "target": "ESNext",
-      "moduleResolution": "Bundler",
-      "moduleDetection": "auto",
-      "allowImportingTsExtensions": true,
-      "noEmit": true,
-      "composite": true,
-      "strict": true,
-      "downlevelIteration": true,
-      "skipLibCheck": true,
-      "jsx": "react-jsx",
-      "allowSyntheticDefaultImports": true,
-      "forceConsistentCasingInFileNames": true,
-      "allowJs": true,
-      "outDir": "./dist",
-      "types": [
-        "bun-types" // add Bun global
-      ]
+        /* Base Options: */
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "target": "es2022",
+        "verbatimModuleSyntax": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleDetection": "force",
+        /* Strictness */
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        /* If transpiling with TypeScript: */
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext",
+        "sourceMap": true,
+        // /* If NOT transpiling with TypeScript: */
+        // "moduleResolution": "Bundler",
+        // "module": "ESNext",
+        // "noEmit": true,
+        // /* If your code runs in the DOM: */
+        // "lib": [
+        //     "es2022",
+        //     "dom",
+        //     "dom.iterable"
+        // ],
+        /* If your code doesn't run in the DOM: */
+        "lib": [
+            "es2022"
+        ],
+
+        /* Custom Options*/
+        "composite": true,
+        "outDir": "dist",
+        "pretty": true,
+        "declaration": true,
+        "declarationDir": "dist/types"
     },
-    "exclude": ["node_modules/*", "**/__tests__/**",  "public/*", "api/**.ts", "**/*_**.ts"],
-    "include": ["index*", "providers/**.ts", "common/**.ts"]
-  }
+    "exclude": [
+        "node_modules/*",
+        "**/__tests__/**",
+        "public/*",
+        "api/**.ts",
+        "**/*_**.ts"
+    ],
+    "include": [
+        "index*",
+        "providers/**.ts",
+        "common/**.ts",
+        "common/_test.js"
+    ]
+}

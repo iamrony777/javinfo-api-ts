@@ -6,12 +6,12 @@ export interface providerResponse {
   poster?: string;
   preview?: string;
   details: {
-    director: string | string[] | undefined;
-    release_date: string | undefined;
-    runtime: number | undefined;
-    studio: string | undefined;
+    director?: string | string[];
+    release_date?: string ;
+    runtime?: number ;
+    studio?: string ;
   };
-  actress: { name: string; image: string }[] | { name: string }[] | undefined;
+  actress: Array<{ name?: string; image?: string } | { name: string }>;
   screenshots?: string[];
   tags?: string[];
 }
